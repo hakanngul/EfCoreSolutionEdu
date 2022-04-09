@@ -9,9 +9,31 @@ public class AppDbContext: DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         Initializer.Build();
-        const string sqlConnection = "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCoreDb;Trusted_Connection=True;";
+        const string sqlConnection = "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCore;Trusted_Connection=True;Integrated Security=true;";
         optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information).UseSqlServer(sqlConnection);
     }
 
     
+
+    public override int SaveChanges()
+    {
+        ChangeTracker.Entries().ToList().ForEach(e =>
+        {
+            if (e.Entity is not Product product) return;
+            if(e.State == EntityState.Added)
+                product.CreatedDate = DateTime.Now;
+        });
+        return base.SaveChanges();
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    {
+        ChangeTracker.Entries().ToList().ForEach(e =>
+        {
+            if (e.Entity is not Product product) return;
+            if(e.State == EntityState.Added)
+                product.CreatedDate = DateTime.Now;
+        });
+        return base.SaveChangesAsync(cancellationToken);
+    }
 }

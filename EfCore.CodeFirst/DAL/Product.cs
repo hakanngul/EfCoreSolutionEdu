@@ -10,8 +10,9 @@ public class Product
 
     [Precision(9, 2)] public decimal DiscountPrice { get; set; }
 
+    public DateTime? CreatedDate { get; set; }
+
     public int Stock { get; set; }
 
     public int Barcode { get; set; }
-    public string TestForDb { get; set; }
 }
