@@ -16,11 +16,11 @@ public class AppDbContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // : One-to-One işlemi FluentAPI ile
-        // modelBuilder.Entity<Product>().HasOne(x => x.ProductFeature).WithOne(x => x.Product)
-        //     .HasForeignKey<ProductFeature>(x => x.ProductId);
+        modelBuilder.Entity<Product>().HasOne(x => x.ProductFeature).WithOne(x => x.Product)
+            .HasForeignKey<ProductFeature>(x => x.Id);
         base.OnModelCreating(modelBuilder);
     }
+
 
     public override int SaveChanges()
     {

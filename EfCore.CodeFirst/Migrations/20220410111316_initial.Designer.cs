@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220410110001_Init")]
-    partial class Init
+    [Migration("20220410111316_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,10 +81,7 @@ namespace EfCore.CodeFirst.Migrations
             modelBuilder.Entity("EfCore.CodeFirst.DAL.ProductFeature", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -93,16 +90,10 @@ namespace EfCore.CodeFirst.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Width")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
 
                     b.ToTable("ProductFeature");
                 });
@@ -118,7 +109,7 @@ namespace EfCore.CodeFirst.Migrations
                 {
                     b.HasOne("EfCore.CodeFirst.DAL.Product", "Product")
                         .WithOne("ProductFeature")
-                        .HasForeignKey("EfCore.CodeFirst.DAL.ProductFeature", "ProductId")
+                        .HasForeignKey("EfCore.CodeFirst.DAL.ProductFeature", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
