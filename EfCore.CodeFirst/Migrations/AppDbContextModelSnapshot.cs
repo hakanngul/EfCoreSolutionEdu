@@ -58,34 +58,36 @@ namespace EfCore.CodeFirst.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("StudentTeacher", b =>
+            modelBuilder.Entity("StudentTeacherManyToMany", b =>
                 {
-                    b.Property<int>("StudentsId")
+                    b.Property<int>("Student_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeachersId")
+                    b.Property<int>("Teacher_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("StudentsId", "TeachersId");
+                    b.HasKey("Student_Id", "Teacher_Id");
 
-                    b.HasIndex("TeachersId");
+                    b.HasIndex("Teacher_Id");
 
-                    b.ToTable("StudentTeacher");
+                    b.ToTable("StudentTeacherManyToMany");
                 });
 
-            modelBuilder.Entity("StudentTeacher", b =>
+            modelBuilder.Entity("StudentTeacherManyToMany", b =>
                 {
                     b.HasOne("EfCore.CodeFirst.DAL.Student", null)
                         .WithMany()
-                        .HasForeignKey("StudentsId")
+                        .HasForeignKey("Student_Id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK__StudentId");
 
                     b.HasOne("EfCore.CodeFirst.DAL.Teacher", null)
                         .WithMany()
-                        .HasForeignKey("TeachersId")
+                        .HasForeignKey("Teacher_Id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK__TreacherId");
                 });
 #pragma warning restore 612, 618
         }
