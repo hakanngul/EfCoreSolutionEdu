@@ -4,6 +4,7 @@ using EfCore.CodeFirst.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220410091704_InitialCreateWithRelationShips")]
+    partial class InitialCreateWithRelationShips
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
@@ -50,7 +52,7 @@ namespace EfCore.CodeFirst.Migrations
                     b.Property<int>("Barcode")
                         .HasColumnType("int");
 
-                    b.Property<int>("Category_Id")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedDate")
@@ -71,7 +73,7 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Category_Id");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -80,7 +82,7 @@ namespace EfCore.CodeFirst.Migrations
                 {
                     b.HasOne("EfCore.CodeFirst.DAL.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("Category_Id")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

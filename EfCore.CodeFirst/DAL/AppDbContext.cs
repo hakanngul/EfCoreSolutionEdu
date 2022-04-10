@@ -6,6 +6,7 @@ namespace EfCore.CodeFirst.DAL;
 public class AppDbContext: DbContext
 {
     public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         Initializer.Build();
@@ -15,10 +16,7 @@ public class AppDbContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Fluent API
-        modelBuilder.Entity<Product>().HasKey(x => x.Id);
-        modelBuilder.Entity<Product>().Property(x=>x.Name).HasMaxLength(200)
-            .IsRequired();
+        modelBuilder.Entity<Category>().HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x=>x.Category_Id);
         base.OnModelCreating(modelBuilder);
     }
 
