@@ -9,7 +9,6 @@ public class Product
     public int Stock { get; set; }
     public int Barcode { get; set; }
     public DateTime? CreatedDate { get; set; }
-    // Navigation Property
-    public int Category_Id { get; set; }
-    public Category Category { get; set; }
+    // public int CategoryId { get; set; }
+    // public Category Category { get; set; }
 }
