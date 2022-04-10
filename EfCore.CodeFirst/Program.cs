@@ -7,14 +7,18 @@ using Microsoft.EntityFrameworkCore;
 Initializer.Build();
 using (var context = new AppDbContext())
 {
-    // var product = context.Products.First(x => x.Id == 1); Bulamazsa exception fırlatıyor
-    //var product = context.Products.First(x => x.Id == 11021);
-    // var product = context.Products.FirstOrDefault(x => x.Id == 4535345);
-    // var product = await context.Products.SingleAsync(x => x.Id == 11021);
-    // var product = await context.Products.SingleAsync(x => x.Id > 11021); Single tek bir data için çalışır fazla olmasında exception fırlatır.
-    // var products = await context.Products.Where(x => x.Id > 11021 && x.Id < 11396).ToListAsync();
-    // var product = await context.Products.FindAsync(11021); // id si 10 olanı bulur null istemiyorsak Single kullanmalıyız.
-    var product = await context.Products.AsNoTracking().FirstAsync(x => x.Id == 11021);
-    Console.WriteLine(context.Entry(product).State);
-    //await context.SaveChangesAsync();
+    string[] pr = {"Kalem", "Defter", "Kitap", "Çanta", "Boya Çantası", "Resim Defteri", "Uhu", "Makas"};
+
+    for (var i = 0; i < 5000; i++)
+    {
+        await context.Products.AddAsync(new()
+        {
+            Name = pr.PickRandom()+ " " + Random.Shared.Next(i, i + 2513),
+            Price = Random.Shared.Next(0, i + 1000),
+            Stock = Random.Shared.Next(0, i + 3410),
+            DiscountPrice = Random.Shared.Next(0, i + 9410),
+            Barcode = Random.Shared.Next(0, i + 1400)
+        });
+    }
+    await context.SaveChangesAsync();
 }

@@ -13,7 +13,14 @@ public class AppDbContext: DbContext
         optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information).UseSqlServer(sqlConnection);
     }
 
-    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Fluent API
+        modelBuilder.Entity<Product>().HasKey(x => x.Id);
+        modelBuilder.Entity<Product>().Property(x=>x.Name).HasMaxLength(200)
+            .IsRequired();
+        base.OnModelCreating(modelBuilder);
+    }
 
     public override int SaveChanges()
     {
