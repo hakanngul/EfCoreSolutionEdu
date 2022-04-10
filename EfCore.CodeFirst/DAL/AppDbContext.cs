@@ -16,8 +16,8 @@ public class AppDbContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Product>().HasOne(x => x.ProductFeature).WithOne(x => x.Product)
-            .HasForeignKey<ProductFeature>(x => x.Id);
+        // modelBuilder.Entity<Product>().HasOne(x => x.ProductFeature).WithOne(x => x.Product)
+        //     .HasForeignKey<ProductFeature>(x => x.Id);
         base.OnModelCreating(modelBuilder);
     }
 

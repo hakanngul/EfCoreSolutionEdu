@@ -1,7 +1,11 @@
-﻿namespace EfCore.CodeFirst.DAL;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EfCore.CodeFirst.DAL;
 
 public class ProductFeature
 {
+    [ForeignKey("Product")]
     public int Id { get; set; }
     public int Width { get; set; }
     public int Height { get; set; }

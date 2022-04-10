@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220410111316_initial")]
-    partial class initial
+    [Migration("20220410111811_initialxy")]
+    partial class initialxy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
