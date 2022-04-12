@@ -7,15 +7,21 @@ using Microsoft.EntityFrameworkCore;
 Initializer.Build();
 using (var context = new AppDbContext())
 {
-    // var category = new Category() {Name = "Çantalar"};
-    // var product = new Product() {Name = "Defter1", Price = 150, Stock = 400, Barcode = 5436, Category = category};
+    Console.WriteLine("Program Cs Başlatıldı...");
+    
+    //Product = Parent
+    //ProductFeature =>> Child
 
-    var category = await context.Categories.FirstAsync(x => x.Name == "Çantalar");
-    var product = new Product() { Name = "Çanta3", Price = 4500, Stock = 10, Barcode = 34536, CategoryId = category.Id};
-
-
+    // var category = context.Categories.First(x => x.Name == "Silgiler");
+    var category = new Category() {Name = "Silgiler"};
+    var product = new Product()
+    {
+        Name = "Silgi6", Price = 50, Barcode = 943, Stock = 200, Category = category,
+        ProductFeature = new ProductFeature {Color = "Green", Height = 100, Width = 200}
+    };
 
     context.Add(product);
     context.SaveChanges();
+    
     Console.WriteLine("Kayıt Başarılı oldu!");
 }
