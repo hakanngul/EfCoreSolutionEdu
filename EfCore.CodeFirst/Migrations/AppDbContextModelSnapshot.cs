@@ -155,8 +155,8 @@ namespace EfCore.CodeFirst.Migrations
             modelBuilder.Entity("EfCore.CodeFirst.DAL.ProductFeature", b =>
                 {
                     b.HasOne("EfCore.CodeFirst.DAL.Product", "Product")
-                        .WithOne("ProductFeature")
-                        .HasForeignKey("EfCore.CodeFirst.DAL.ProductFeature", "Id")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -181,12 +181,6 @@ namespace EfCore.CodeFirst.Migrations
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
-                {
-                    b.Navigation("ProductFeature")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

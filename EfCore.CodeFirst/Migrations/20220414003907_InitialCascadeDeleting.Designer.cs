@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220414001636_AddStudentAndTeacher")]
-    partial class AddStudentAndTeacher
+    [Migration("20220414003907_InitialCascadeDeleting")]
+    partial class InitialCascadeDeleting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -157,8 +157,8 @@ namespace EfCore.CodeFirst.Migrations
             modelBuilder.Entity("EfCore.CodeFirst.DAL.ProductFeature", b =>
                 {
                     b.HasOne("EfCore.CodeFirst.DAL.Product", "Product")
-                        .WithOne("ProductFeature")
-                        .HasForeignKey("EfCore.CodeFirst.DAL.ProductFeature", "Id")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -183,12 +183,6 @@ namespace EfCore.CodeFirst.Migrations
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
-                {
-                    b.Navigation("ProductFeature")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
