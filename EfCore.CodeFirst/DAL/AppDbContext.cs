@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<Category>().HasMany(x => x.Products).WithOne(x => x.Category)
             .HasForeignKey(x => x.CategoryId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
         
         base.OnModelCreating(modelBuilder);
     }

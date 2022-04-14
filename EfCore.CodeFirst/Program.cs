@@ -18,6 +18,8 @@ using (var context = new AppDbContext())
     // };
     // context.Add(category);
     var category = context.Categories.First();
+    var products = context.Products.Where(x => x.CategoryId == category.Id).ToList();
+    context.RemoveRange(products);
     context.Remove(category);
     context.SaveChanges();
     Console.WriteLine("Kayıt Başarılı oldu!");
