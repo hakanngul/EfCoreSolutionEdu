@@ -8,20 +8,25 @@ Initializer.Build();
 using (var context = new AppDbContext())
 {
     Console.WriteLine("Program Cs Başlatıldı...");
-    
-    //Product = Parent
-    //ProductFeature =>> Child
 
-    // var category = context.Categories.First(x => x.Name == "Silgiler");
-    var category = new Category() {Name = "Silgiler"};
-    var product = new Product()
-    {
-        Name = "Silgi6", Price = 50, Barcode = 943, Stock = 200, Category = category,
-        ProductFeature = new ProductFeature {Color = "Green", Height = 100, Width = 200}
-    };
+    // var student = new Student() { Name = "Ahmet", Age = 25};
+    // student.Teachers.Add(new (){Name = "Ahmet Öğretmen"});
+    // student.Teachers.Add(new(){Name = "Mehmet Öğretmen"});
+    // context.Add(student);
+    // var teacher = new Teacher()
+    // {
+    //     Name = "Hasan Öğretmen", Students = new()
+    //     {
+    //         new Student(){Name = "Ali", Age = 23},
+    //         new Student(){Name = "Veli", Age = 22}
+    //     }
+    // };
+    // context.Add(teacher);
 
-    context.Add(product);
+    var teacher = context.Teachers.First(x => x.Name == "Hasan Öğretmen");
+    teacher.Students.Add(new Student() {Name = "Burcu", Age = 21});
+    teacher.Students.Add(new Student(){Name = "Selin", Age = 23});
+
     context.SaveChanges();
-    
     Console.WriteLine("Kayıt Başarılı oldu!");
 }
