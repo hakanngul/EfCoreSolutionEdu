@@ -20,12 +20,13 @@ public class Product
 
     public int CategoryId { get; set; }
 
-    public Category Category { get; set; }
+    public virtual Category Category { get; set; }
 
-    public ProductFeature ProductFeature { get; set; }
+    public virtual ProductFeature ProductFeature { get; set; }
+    
+    
     // public decimal PriceKdv { get; set; }
     // public int Kdv { get; set; }
-
     // sadece insert işleminde yapsın demek Identity, Update işleminde yapmıyor.
     // [DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
     // public DateTime? CreatedDate { get; set; } = DateTime.Now;

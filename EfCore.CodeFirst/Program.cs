@@ -7,24 +7,16 @@ using Microsoft.EntityFrameworkCore;
 Initializer.Build();
 using (var context = new AppDbContext())
 {
-    //Expilict Loading işleminde bağlı olan product veya diğer bağlı entrylerin yüklenme işlemini sonra yapabiliyoruz.
-    // var category = context.Categories.FirstOrDefault();
+    //Lazy Loading => Geç Yüklenme İşlemi de denilebilir.
+    //Category e bağlı alt entity de sorgu olması durumunda Lazy veya Exxplicit Loading kullanılmalı.
 
-    // if (true)
-    // {
-        // Product ile category arasında collection ilişki bulunuyor.
-        // var products = context.Products.Where(x => x.CategoryId == category.Id);
-        // burada if doğru olduğunda category e producları yükleme yapıyoruz.
-        // context.Entry(category).Collection(x => x!.Products).Load();
-        // category?.Products.ForEach(x => { Console.WriteLine(x.Name); });
-    // }
-    var product = context.Products.FirstOrDefault();
-    if (true)
+    var category = await context.Categories.FirstOrDefaultAsync();
+    Console.WriteLine("Category Çekildi ");
+    var products = category.Products;
+
+    foreach (var product in products)
     {
-        // context.ProductFeatures.Where(x => x.Id == product.Id).First();
-        //Product ile ProductFeature arasında referans üzerinden erişim yapabiliyoruz.
-        //çünkü referans ilişkisi bulunuyor.
-        context.Entry(product).Reference(x=>x.ProductFeature).Load();
+        var productFeature = product.ProductFeature;
     }
     
     Console.WriteLine("İşlem Başarılı oldu!");
