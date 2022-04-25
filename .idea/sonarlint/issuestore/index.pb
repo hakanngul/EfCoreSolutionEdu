@@ -5,7 +5,3 @@ X
 (EfCore.CodeFirst/EfCore.CodeFirst.csproj,c\8\c88dd995851f9f172ccacbca02c2a705d7895427
 O
 EfCore.CodeFirst/DAL/Teacher.cs,6\9\69a0d6aee564c72c50737cac3eca4ecb2614b6a1
-ù
-mEfCore.CodeFirst/Migrations/20220414011427_DatabaseGenerated_DatabaseGeneratedOption_ComputedDecimalUpdate.cs,c\2\c2b9a3d24beb2b8729e05929d1c08b0cd53f14b3
-¶
-vEfCore.CodeFirst/Migrations/20220414011427_DatabaseGenerated_DatabaseGeneratedOption_ComputedDecimalUpdate.Designer.cs,4\a\4ac2f20e4b0ee5e1fb0cf389c233c0d127c4bc8f
