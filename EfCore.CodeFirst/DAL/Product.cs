@@ -11,8 +11,7 @@ public class Product
     public string Name { get; set; }
 
     // burada tutulacak karakter toplam 18 olabilir ve virgülden sonra 2 basamak alınabilir anlamını ifade ediyor.
-    [Precision(18, 2)] 
-    public decimal Price { get; set; }
+    [Precision(18, 2)] public decimal Price { get; set; }
 
     public int Stock { get; set; }
     public int Barcode { get; set; }
@@ -23,8 +22,8 @@ public class Product
     public virtual Category Category { get; set; }
 
     public virtual ProductFeature ProductFeature { get; set; }
-    
-    
+
+
     // public decimal PriceKdv { get; set; }
     // public int Kdv { get; set; }
     // sadece insert işleminde yapsın demek Identity, Update işleminde yapmıyor.

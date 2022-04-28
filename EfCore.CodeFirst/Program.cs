@@ -8,28 +8,18 @@ using Microsoft.EntityFrameworkCore;
 Initializer.Build();
 using (var context = new AppDbContext())
 {
-    // context.Persons.Add(new Manager() {FirstName = "M1", LastName = "m2", Age = 22, Grade = 1});
-    // context.Employees.Add(new Employee() {FirstName = "E1", LastName = "e2", Age = 32,});
-    // context.SaveChanges();
-    var manager = context.Managers.ToList();
-    var employees = context.Employees.ToList();
-    var persons = context.Persons.ToList();
-    
-    persons.ForEach(p =>
+
+    context.Employees.Add(new Employee()
     {
-        switch (p)
-        {
-            case Manager manager:
-                Console.WriteLine($"Manager => {manager.Grade} - {manager.FirstName} - {manager.LastName} - {manager.Age}");
-                break;
-            case Employee employee:
-                Console.WriteLine($"Employee => {employee.Salary} - {employee.FirstName} - {employee.LastName} - {employee.Age}");
-                break;
-            default:
-                break;
-        }
+        FirstName = "Employee2", LastName = "eMp2", Age = 22,Salary = 3000
     });
-    
-    
+
+    context.Managers.Add(new Manager()
+    {
+        FirstName = "Managers2", LastName = "mN2", Age = 36, Grade = 6
+    });
+
+
+    context.SaveChanges();
     Console.WriteLine("İşlem Başarılı oldu!");
 }

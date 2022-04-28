@@ -32,10 +32,6 @@ namespace EfCore.CodeFirst.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -46,9 +42,7 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("BasePerson");
+                    b.ToTable("Persons", (string)null);
                 });
 
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Employee", b =>
@@ -59,7 +53,7 @@ namespace EfCore.CodeFirst.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasDiscriminator().HasValue("Employee");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Manager", b =>
@@ -69,7 +63,25 @@ namespace EfCore.CodeFirst.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("Manager");
+                    b.ToTable("Managers", (string)null);
+                });
+
+            modelBuilder.Entity("EfCore.CodeFirst.DAL.Employee", b =>
+                {
+                    b.HasOne("EfCore.CodeFirst.DAL.BasePerson", null)
+                        .WithOne()
+                        .HasForeignKey("EfCore.CodeFirst.DAL.Employee", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EfCore.CodeFirst.DAL.Manager", b =>
+                {
+                    b.HasOne("EfCore.CodeFirst.DAL.BasePerson", null)
+                        .WithOne()
+                        .HasForeignKey("EfCore.CodeFirst.DAL.Manager", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

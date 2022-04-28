@@ -19,6 +19,16 @@ public class AppDbContext : DbContext
     private string Sql { get; } =
         "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCore;Trusted_Connection=True;Integrated Security=true;";
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        //TPT davranısı istiyorsak
+        modelBuilder.Entity<BasePerson>().ToTable("Persons");
+        modelBuilder.Entity<Employee>().ToTable("Employees");
+        modelBuilder.Entity<Manager>().ToTable("Managers");
+        
+        base.OnModelCreating(modelBuilder);
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         Initializer.Build();
