@@ -2,7 +2,6 @@
 
 namespace EfCore.CodeFirst.DAL;
 
-[Owned]
 public class Person
 {
     public string FirstName { get; set; }

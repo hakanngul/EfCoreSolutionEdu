@@ -3,6 +3,7 @@ using EfCore.CodeFirst.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220428210302_Ownedentitywithfluentapi")]
+    partial class Ownedentitywithfluentapi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,16 +64,13 @@ namespace EfCore.CodeFirst.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<int>("Age")
-                                .HasColumnType("int")
-                                .HasColumnName("Age");
+                                .HasColumnType("int");
 
                             b1.Property<string>("FirstName")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("FirstName");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("LastName")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("LastName");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("EmployeeId");
 
@@ -92,16 +91,13 @@ namespace EfCore.CodeFirst.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<int>("Age")
-                                .HasColumnType("int")
-                                .HasColumnName("Age");
+                                .HasColumnType("int");
 
                             b1.Property<string>("FirstName")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("FirstName");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("LastName")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("LastName");
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("ManagerId");
 

@@ -18,4 +18,22 @@ public class AppDbContext : DbContext
         Initializer.Build();
         optionsBuilder.UseSqlServer(Sql);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Fluent Owned Entity Types 
+        modelBuilder.Entity<Manager>().OwnsOne(x => x.Person, p =>
+        {
+            p.Property(x => x.FirstName).HasColumnName("FirstName");
+            p.Property(x => x.LastName).HasColumnName("LastName");
+            p.Property(x => x.Age).HasColumnName("Age");
+        });
+        modelBuilder.Entity<Employee>().OwnsOne(x => x.Person, e =>
+        {
+            e.Property(x => x.FirstName).HasColumnName("FirstName");
+            e.Property(x => x.LastName).HasColumnName("LastName");
+            e.Property(x => x.Age).HasColumnName("Age");
+        });
+        base.OnModelCreating(modelBuilder);
+    }
 }
