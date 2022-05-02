@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfCore.CodeFirst.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220502185818_AddPeople")]
-    partial class AddPeople
+    [Migration("20220502191849_addUrlWithUniCodeAndIgnoreBarcode")]
+    partial class addUrlWithUniCodeAndIgnoreBarcode
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,21 +36,7 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("EfCore.CodeFirst.DAL.Person", b =>
-                {
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("People");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
@@ -61,14 +47,12 @@ namespace EfCore.CodeFirst.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Barcode")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
@@ -76,6 +60,10 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("ProductUrl");
 
                     b.HasKey("Id");
 
@@ -100,32 +88,7 @@ namespace EfCore.CodeFirst.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductFeatures");
-                });
-
-            modelBuilder.Entity("EfCore.CodeFirst.DAL.ProductFull", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Height")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductFulls");
+                    b.ToTable("ProductFeature");
                 });
 
             modelBuilder.Entity("EfCore.CodeFirst.DAL.Product", b =>
