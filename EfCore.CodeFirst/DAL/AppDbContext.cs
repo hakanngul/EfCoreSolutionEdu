@@ -7,11 +7,7 @@ namespace EfCore.CodeFirst.DAL;
 public class AppDbContext : DbContext
 {
     public DbSet<Product> Products { get; set; }
-    // public DbSet<Category> Categories { get; set; }
-    // public DbSet<ProductFeature> ProductFeatures { get; set; }
-    // public DbSet<ProductFull> ProductFulls { get; set; }
-    // public DbSet<Person> People { get; set; }
-
+    
     private const string Sql =
         "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCore;Trusted_Connection=True;Integrated Security=true;";
 
@@ -23,12 +19,9 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Bu ilgili sütun yani Barcode artık veri tabanına oluşmayacak.
-        modelBuilder.Entity<Product>().Ignore(x => x.Barcode);
-        // Bu ilgili property artık nvarchar değil varchar olarak olacak.
-        modelBuilder.Entity<Product>().Property(x => x.Name).IsUnicode(false);
-        //Db tarafında propertinin özellğini ve ismini değiştirme işlemi yapıyoruz.
-        modelBuilder.Entity<Product>().Property(x => x.Url).HasColumnType("varchar(500)").HasColumnName("ProductUrl");
+        // modelBuilder.Entity<Product>().HasIndex(x => x.Name);
+        //modelBuilder.Entity<Product>().HasIndex(x => new {x.Name, x.Url});
+        modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(9, 2);
         base.OnModelCreating(modelBuilder);
     }
 }

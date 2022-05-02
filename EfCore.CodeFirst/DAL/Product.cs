@@ -1,26 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace EfCore.CodeFirst.DAL;
 
+//[Index(nameof(Name), nameof(Price))] => Birlikte kullanımı için  yapılan örnek Ayrı ayrı için ise şöyle
+[Index(nameof(Price))] //sadece Price de sorgu yaparsak çok hızlı çalışacak
+[Index(nameof(Name))] //sadece name de sorgu yaparsak çok hızlı çalışacak
+[Index(nameof(Url))]
+[Index(nameof(Name), nameof(Url))] // Burada her 2 si içinde index yaptığımız için birlikte kullanımda çok hızlı çalışacaktır.
 public class Product
 {
-    
+    //Note: Bu indexleme işlemi çok maliyetli bir olay ayrı tablolar oluşturulduğu için maliyet artabilir.
+    //context.Products.Where(x=>x.Name="kalem1" && price>1000)
+    //indexleme işleminde sorgu olayında EfCore un hızlı çalışması ve db yi indexleme yaptığı için
+    //veriyi hızlı döndürme işlemi yapmaktadır.
     public int Id { get; set; }
-
-    //[Column(TypeName = "nvarchar(200)")]
-    public string Url { get; set; }
-    
-    //[Unicode(false)] // varchar() olarak gelecek bize
     public string Name { get; set; }
-    [Precision(18, 2)] 
-    public decimal Price { get; set; }
+    public string Url { get; set; }
     public int Stock { get; set; }
-    //[NotMapped] // Bu ilgili sütun yani Barcode artık veri tabanına oluşmayacak.
+    public decimal Price { get; set; }
     public int Barcode { get; set; }
     public int CategoryId { get; set; }
-    public virtual Category Category { get; set; }
-    public virtual ProductFeature ProductFeature { get; set; }
-
-
 }
