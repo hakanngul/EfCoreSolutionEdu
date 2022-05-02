@@ -6,9 +6,10 @@ namespace EfCore.CodeFirst.DAL;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Manager> Managers { get; set; }
-    public DbSet<Employee> Employees { get; set; }
-
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<ProductFeature> ProductFeatures { get; set; }
+    public DbSet<ProductFull> ProductFulls { get; set; }
 
     private const string Sql =
         "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCore;Trusted_Connection=True;Integrated Security=true;";
@@ -21,19 +22,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Fluent Owned Entity Types 
-        modelBuilder.Entity<Manager>().OwnsOne(x => x.Person, p =>
-        {
-            p.Property(x => x.FirstName).HasColumnName("FirstName");
-            p.Property(x => x.LastName).HasColumnName("LastName");
-            p.Property(x => x.Age).HasColumnName("Age");
-        });
-        modelBuilder.Entity<Employee>().OwnsOne(x => x.Person, e =>
-        {
-            e.Property(x => x.FirstName).HasColumnName("FirstName");
-            e.Property(x => x.LastName).HasColumnName("LastName");
-            e.Property(x => x.Age).HasColumnName("Age");
-        });
+        // modelBuilder.Entity<ProductFull>().HasNoKey(); 
         base.OnModelCreating(modelBuilder);
     }
 }

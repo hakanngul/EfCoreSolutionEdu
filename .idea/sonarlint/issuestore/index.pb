@@ -1,7 +1,9 @@
 
 W
 'EfCore.CodeFirst/EnumerableExtension.cs,9\f\9f3783992ff51f892c205f8c65960b123223d7ff
-O
-EfCore.CodeFirst/DAL/Teacher.cs,6\9\69a0d6aee564c72c50737cac3eca4ecb2614b6a1
 X
 (EfCore.CodeFirst/EfCore.CodeFirst.csproj,c\8\c88dd995851f9f172ccacbca02c2a705d7895427
+Q
+!EfCore.CodeFirst/appsettings.json,5\2\52993031be20910407dc453dcde79d9c35566b39
+O
+EfCore.CodeFirst/DAL/Product.cs,0\1\01044d7d6da6137f5da9de60c2a9ab758e792637
