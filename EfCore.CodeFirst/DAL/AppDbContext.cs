@@ -10,6 +10,7 @@ public class AppDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<ProductFeature> ProductFeatures { get; set; }
     public DbSet<ProductFull> ProductFulls { get; set; }
+    public DbSet<Person> People { get; set; }
 
     private const string Sql =
         "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCore;Trusted_Connection=True;Integrated Security=true;";

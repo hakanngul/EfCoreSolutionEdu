@@ -4,10 +4,19 @@ using Bogus;
 using EfCore.CodeFirst;
 using EfCore.CodeFirst.DAL;
 using Microsoft.EntityFrameworkCore;
+using Person = EfCore.CodeFirst.DAL.Person;
 
 Initializer.Build();
 using (var context = new AppDbContext())
 {
+    // Efcore da PrimaryKey olmayan bir tablo için ekleme ve güncelleme yapılamaz
+    // Fakat Okuma yapılabilir.
+    context.People.Add(new Person()
+    {
+        FirstName = "Ahmet",
+        LastName = "Yılmaz",
+        Age = 23
+    });
     var productFulls = context.ProductFulls.FromSqlRaw(
         @"SELECT p.Id , c.Name 'CategoryName', p.Name, p.Price, pf.Height FROM Products as p
         JOIN ProductFeatures pf on p.Id = pf.Id
