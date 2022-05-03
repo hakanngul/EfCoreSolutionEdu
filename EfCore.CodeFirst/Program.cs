@@ -35,5 +35,14 @@ using (var context = new AppDbContext())
         ProductName = p.Name,
         ProductPrice = p.Price
     }).ToList();
+
+    var result2 =
+        (from c in context.Categories join p in context.Products on c.Id equals p.CategoryId 
+            select new
+            {
+                CategoryName = c.Name,
+                ProductName = p.Name,
+                ProductPrice = p.Price
+            }).ToList();
     Console.WriteLine("İşlem Başarılı oldu!");
 }

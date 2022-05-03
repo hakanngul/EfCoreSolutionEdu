@@ -16,12 +16,11 @@ public class AppDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         Initializer.Build();
-        optionsBuilder.UseSqlServer(Sql);
+        optionsBuilder.UseSqlServer(Sql).LogTo(Console.WriteLine, LogLevel.Information);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
         base.OnModelCreating(modelBuilder);
     }
 }
