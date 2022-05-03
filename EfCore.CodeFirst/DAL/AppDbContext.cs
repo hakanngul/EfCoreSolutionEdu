@@ -20,7 +20,10 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // modelBuilder.Entity<Product>().HasIndex(x => x.Name);
-        //modelBuilder.Entity<Product>().HasIndex(x => new {x.Name, x.Url});
+        // modelBuilder.Entity<Product>().HasIndex(x => new {x.Name, x.Url});
+        // altta bulunan kısımda Indexi Name olarak alıyoruz fakat beraberinde diyoruz ki Price ile Stocku da ekle diyoruz.
+        //    var response = context.Products.Where(x => x.Name == "kalem1").Select(x => new {name = x.Name, Price = x.Price, Stock = x.Stock});
+        modelBuilder.Entity<Product>().HasIndex(x => x.Name).IncludeProperties(x=>new {x.Price, x.Stock});
         modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(9, 2);
         base.OnModelCreating(modelBuilder);
     }

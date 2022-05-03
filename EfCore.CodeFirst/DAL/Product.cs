@@ -13,6 +13,7 @@ public class Product
     //context.Products.Where(x=>x.Name="kalem1" && price>1000)
     //indexleme işleminde sorgu olayında EfCore un hızlı çalışması ve db yi indexleme yaptığı için
     //veriyi hızlı döndürme işlemi yapmaktadır.
+    //context.products.where(x=>x.name="kalem1").select(x=>new{name=x.Name, Price=x.price})
     public int Id { get; set; }
     public string Name { get; set; }
     public string Url { get; set; }
