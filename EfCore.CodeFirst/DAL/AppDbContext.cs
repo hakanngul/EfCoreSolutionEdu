@@ -6,7 +6,9 @@ namespace EfCore.CodeFirst.DAL;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Person> People { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<ProductFeature> ProductFeatures { get; set; }
 
     private const string Sql =
         "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCore;Trusted_Connection=True;Integrated Security=true;";

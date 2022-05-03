@@ -6,21 +6,28 @@ using EfCore.CodeFirst.DAL;
 // Initializer.Build();
 using (var context = new AppDbContext())
 {
-    // context.People.AddRange(new Person()
-    // {
-    //     Name = "Maşide", Phone = "05417564355"
-    // }, new Person()
-    // {
-    //     Name = "Çiçek", Phone = "05347126079"
-    // });
-    // context.SaveChanges();
-    // var person = context.People.ToList().AsReadOnly().Where(x => FormatPhone(x.Phone) == "5417564355").ToList();
-    var person = context.People.Where(x=>x.Name.StartsWith("M")).ToList()
-        .Select(x => new {PersonName = x.Name, PersonPhone = FormatPhone(x.Phone)})
-        .ToList();
-    string FormatPhone(string phone) => phone.Substring(1, phone.Length - 1);
-    Console.WriteLine(person);
-
-
+    var category = new Category() {Name = "Kalemler"};
+    category.Products.Add(new()
+    {
+        Name = "Kurşun Kalem", Price = 100, Stock = 100, Barcode = 123, Url = "Kursunx.jpg",
+        ProductFeature = new ProductFeature() {Color = "Red", Height = 150, Width = 300}
+    });
+    category.Products.Add(new()
+    {
+        Name = "Tükenmez Kalem", Price = 600, Stock = 230, Barcode = 567, Url = "tukenmezx.jpg",
+        ProductFeature = new ProductFeature() {Color = "Green", Height = 250, Width = 350}
+    });
+    category.Products.Add(new()
+    {
+        Name = "Boya Kalemi", Price = 100, Stock = 100, Barcode = 542, Url = "boyax.jpg",
+        ProductFeature = new ProductFeature() {Color = "Blue", Height = 150, Width = 300}
+    });
+    category.Products.Add(new()
+    {
+        Name = "Süs Kalemi", Price = 100, Stock = 100, Barcode = 123, Url = "susx.jpg",
+        ProductFeature = new ProductFeature() {Color = "Yellow", Height = 150, Width = 300}
+    });
+    context.Categories.Add(category);
+    context.SaveChanges();
     Console.WriteLine("İşlem Başarılı oldu!");
 }

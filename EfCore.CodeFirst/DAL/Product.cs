@@ -15,4 +15,5 @@ public class Product
     public decimal Price { get; set; }
     [Precision(9,2)]
     public decimal DiscountPrice { get; set; }
+    public ProductFeature ProductFeature { get; set; }
 }
