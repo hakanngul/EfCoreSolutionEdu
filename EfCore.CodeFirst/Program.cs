@@ -29,20 +29,28 @@ using (var context = new AppDbContext())
     // context.Categories.Add(category);
     // context.SaveChanges();
 
-    var result = context.Categories.Join(context.Products, x => x.Id, y => y.CategoryId, (c, p) => new
-    {
-        CategoryName = c.Name,
-        ProductName = p.Name,
-        ProductPrice = p.Price
-    }).ToList();
+    // var result = (from c in context.Categories join p in context.Products context=)
 
-    var result2 =
-        (from c in context.Categories join p in context.Products on c.Id equals p.CategoryId 
-            select new
-            {
-                CategoryName = c.Name,
-                ProductName = p.Name,
-                ProductPrice = p.Price
-            }).ToList();
+    var result1 = context.Categories
+        .Join(context.Products, c => c.Id, p => p.CategoryId,
+            (c, p) => new {c, p})
+        .Join(context.ProductFeatures, x => x.p.Id, y => y.Id, (c, pf) => new
+        {
+            CategoryName = c.c.Name,
+            ProductName = c.p.Name,
+            ProductFeature = pf.Color
+        }).ToList();
+
+    var result2 = (from c in context.Categories
+        join p in context.Products on c.Id equals p.CategoryId
+        join pf in context.ProductFeatures on p.Id equals pf.Id
+        select new
+        {
+            CategoryName = c.Name,
+            ProductName = p.Name,
+            ProductFeature = pf.Color
+        }).ToList();
+
+
     Console.WriteLine("İşlem Başarılı oldu!");
 }
