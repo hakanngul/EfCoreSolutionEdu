@@ -46,9 +46,7 @@ using (var context = new AppDbContext())
         join pf in context.ProductFeatures on p.Id equals pf.Id
         select new
         {
-            CategoryName = c.Name,
-            ProductName = p.Name,
-            ProductFeature = pf.Color
+            c,p,pf
         }).ToList();
 
 
