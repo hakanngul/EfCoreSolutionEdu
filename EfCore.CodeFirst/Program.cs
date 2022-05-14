@@ -2,6 +2,8 @@
 
 using EfCore.CodeFirst;
 using EfCore.CodeFirst.DAL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 using (var context = new AppDbContext())
 {
@@ -31,24 +33,11 @@ using (var context = new AppDbContext())
 
     // var result = (from c in context.Categories join p in context.Products context=)
 
-    var result1 = context.Categories
-        .Join(context.Products, c => c.Id, p => p.CategoryId,
-            (c, p) => new {c, p})
-        .Join(context.ProductFeatures, x => x.p.Id, y => y.Id, (c, pf) => new
-        {
-            CategoryName = c.c.Name,
-            ProductName = c.p.Name,
-            ProductFeature = pf.Color
-        }).ToList();
+    // var result = await (from p in context.Categories
+    //     join pf in context.ProductFeatures on p.Id equals pf.Id
+    //     select new {p}).ToListAsync();
+    //     
 
-    var result2 = (from c in context.Categories
-        join p in context.Products on c.Id equals p.CategoryId
-        join pf in context.ProductFeatures on p.Id equals pf.Id
-        select new
-        {
-            c,p,pf
-        }).ToList();
-
-
+    var products = context.ProductEssantials.Where(x=>x.Price>200).ToList();
     Console.WriteLine("İşlem Başarılı oldu!");
 }

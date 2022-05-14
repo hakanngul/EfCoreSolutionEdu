@@ -15,5 +15,3 @@ n
 >EfCore.CodeFirst/Migrations/20220503151556_Initial.Designer.cs,5\4\54581f4d642e9961ce9ec37a74fc06761ca3febf
 e
 5EfCore.CodeFirst/Migrations/20220503151556_Initial.cs,5\e\5effbeeca447687f9b5ef1d556e9b4adb01155de
-h
-8EfCore.CodeFirst/Migrations/AppDbContextModelSnapshot.cs,0\c\0c1f0e43a6d317c277f8a37f9aec8f4fd49515a7
