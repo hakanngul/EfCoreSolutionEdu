@@ -1,0 +1,4 @@
+
+qcsharpsquid:S1118"OAdd a 'protected' constructor or the 'static' keyword to the class declaration.(È¡Ó½øÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Õ¯Í‡
+gcsharpsquid:S2223"JChange the visibility of 'Configuration' or make it 'const' or 'readonly'.(Õ¯Í‡
