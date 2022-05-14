@@ -10,7 +10,6 @@ public class AppDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductFeature> ProductFeatures { get; set; }
-    public DbSet<ProductFull> ProductFulls { get; set; }
 
     private const string Sql =
         "Server=HAKANGUL\\SQLEXPRESS01;Database=EfCore;Trusted_Connection=True;Integrated Security=true;";
@@ -23,8 +22,8 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ProductFull>().HasNoKey().ToView("ProductWithFeature");
-        
+        modelBuilder.Entity<Product>().Property(x => x.IsDeleted).HasDefaultValue(false);
+        modelBuilder.Entity<Product>().HasQueryFilter(p=>!p.IsDeleted);
         base.OnModelCreating(modelBuilder);
     }
 }
